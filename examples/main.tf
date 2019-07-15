@@ -25,3 +25,7 @@ module "nat" {
   cidr_block = "${var.cidr_block}"
 }
 
+output "nat_gateway_ids" {
+  value = "${module.nat.nat_gateway_ids}"
+}
+

@@ -67,3 +67,7 @@ data "aws_internet_gateway" "vpc" {
   }
 }
 
+output "nat_gateway_ids" {
+  value = "${aws_nat_gateway.nat.*.id}"
+}
+
