@@ -1,17 +1,17 @@
 variable "region" {
-  type = "string"
+  type = string
 }
 
 variable "vpc_id" {
-  type = "string"
+  type = string
 }
 
 variable "cidr_block" {
-  type = "string"
+  type = string
 }
 
 provider "aws" {
-  region = "${var.region}"
+  region = var.region
 }
 
 data "aws_availability_zones" "available" {
@@ -19,9 +19,9 @@ data "aws_availability_zones" "available" {
 }
 
 module "nat" {
-  source = "github.com/asannou/terraform-aws-nat-gateway"
-  vpc_id = "${var.vpc_id}"
-  availability_zones = ["${data.aws_availability_zones.available.names}"]
-  cidr_block = "${var.cidr_block}"
+  source             = "github.com/asannou/terraform-aws-nat-gateway?ref=0.12"
+  vpc_id             = var.vpc_id
+  availability_zones = data.aws_availability_zones.available.names
+  cidr_block         = var.cidr_block
 }
 
